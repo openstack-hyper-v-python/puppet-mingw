@@ -32,6 +32,13 @@ class mingw (
       provider  => powershell,
       before    => [Mingw::Dependency['mingw32-gendef'],Mingw::Dependency['mingw32-pthreads-w32'],Mingw::Dependency['msys'],Mingw::Dependency['gcc'],Mingw::Dependency['g++'],Mingw::Dependency['mingw32-make'],Mingw::Dependency['libtool']],
   }
+  
+  file_line { 'quoted-include':
+    path    =>  "$(mgw_path_base)\\include\\process.h",
+    match   =>  "<stdint.h>",
+    line    =>  "#include \"stdint.h\""
+    require =>  Exec['install-mingw'],
+  }
 
   mingw::dependency{ 'msys':
     remote_url => undef,
