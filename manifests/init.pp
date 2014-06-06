@@ -30,7 +30,7 @@ class mingw (
   exec {'install-mingw':
       command   => "set \"mingw=${mgw_path_base}\" ; ${mgw_get_path}\\bin\\mingw-get.exe install mingw32-base",
       provider  => powershell,
-      before    => [Mingw::Dependency['mingw32-gendef'],Mingw::Dependency['mingw32-pthreads-w32'],Mingw::Dependency['msys'],Mingw::Dependency['gcc'],Mingw::Dependency['g++'],Mingw::Dependency['mingw32-make'],Mingw::Dependency['libtool']],
+      before    => [Mingw::Dependency['msys'],Mingw::Dependency['gcc'],Mingw::Dependency['g++'],Mingw::Dependency['mingw32-make'],Mingw::Dependency['libtool']],
   }
   
   mingw::dependency{ 'msys':
